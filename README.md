@@ -11,10 +11,10 @@
 ```javascript
 import Vue from 'vue'
 import Router from 'vue-router'
-import AutoRouter from "ea-router";
+import RouteGenerator from "ea-router";
 
 Vue.use(Router)
-let generator = new AutoRouter(require.context('./views', true, /\.vue$/))
+let generator = new RouteGenerator(require.context('./views', true, /\.vue$/))
 
 export default new Router({
   routes: generator.generate()
@@ -40,4 +40,4 @@ export default new Router({
 
 ## 后续功能
 
-- 开放部门API以便实现更灵活的定制化需求
+- 开放部分API以便实现更灵活的定制化需求
