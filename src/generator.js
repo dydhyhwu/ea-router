@@ -1,5 +1,6 @@
 import View from './view';
 import Directory from './directory';
+import { VueRouterAdapter } from './adapter/VueRouterAdapter';
 
 class RouteProvider {
     /**
@@ -41,7 +42,8 @@ class RouteProvider {
      * @return {Array}
      */
     generate() {
-        return this._directory.toRouter();
+        let adapter = new VueRouterAdapter();
+        return adapter.convertDirectories(this._directory);
     }
 
     /**
