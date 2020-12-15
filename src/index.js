@@ -1,3 +1,3 @@
-import RouteGenerator from './generator'
+import RouteGenerator from './generator';
 
-export default RouteGenerator
+export default RouteGenerator;

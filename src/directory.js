@@ -2,13 +2,20 @@
  * 目录类
  */
 class Directory {
-
     /**
      * 当前目录下所有视图
      * @type {Array}
      * @private
      */
     _views = [];
+
+    get Views() {
+        return this._views;
+    }
+
+    get SubDirectories() {
+        return this._subDirectory;
+    }
 
     /**
      * 文件路径分隔后的数组
@@ -37,9 +44,9 @@ class Directory {
     }
 
     addView(view) {
-        if(this.isCurrentDirectoryView(view)) {
+        if (this.isCurrentDirectoryView(view)) {
             this._views.push(view);
-        } else if(this._isInSubDirectory(view)) {
+        } else if (this._isInSubDirectory(view)) {
             this._addInSubDirectory(view);
         } else {
             let newSubDirectory = this._createSubDirectory(view);
@@ -52,22 +59,24 @@ class Directory {
      * 转换成 vue-router 的route对象
      */
     toRouter() {
-        let layout = this._getLayout();
+        let layout = this.getLayoutView();
         return {
-            path: this._getPath(),
+            path: this.getPath(),
             name: layout.Component.name,
             component: layout.Component,
-            children: this._getChildrenRoutes()
+            children: this._getChildrenRoutes(),
         };
     }
 
     isCurrentDirectoryView(view) {
-        let tailPathInfos = view.Path
-            .replace(`${this._path}`, '')
+        let tailPathInfos = view.Path.replace(`${this._path}`, '')
             .replace(/^\//, '')
             .split('/');
 
-        return this._isStartWith(view.Path, this._path) && tailPathInfos.length === 1;
+        return (
+            this._isStartWith(view.Path, this._path) &&
+            tailPathInfos.length === 1
+        );
     }
 
     /**
@@ -97,9 +106,9 @@ class Directory {
      * @private
      */
     _isInSubDirectory(view) {
-        for(let index in this._subDirectory) {
+        for (let index in this._subDirectory) {
             let directory = this._subDirectory[index];
-            if(directory.containView(view)) return true;
+            if (directory.containView(view)) return true;
         }
         return false;
     }
@@ -121,9 +130,9 @@ class Directory {
      * @private
      */
     _getSubDirectory(view) {
-        for(let index in this._subDirectory) {
+        for (let index in this._subDirectory) {
             let directory = this._subDirectory[index];
-            if(directory.containView(view)) return directory;
+            if (directory.containView(view)) return directory;
         }
         return null;
     }
@@ -134,8 +143,7 @@ class Directory {
      * @private
      */
     _createSubDirectory(view) {
-        let path = view.Path
-            .replace(`${this._path}`, '')
+        let path = view.Path.replace(`${this._path}`, '')
             .replace(/^\//, '')
             .split('/')[0];
         return new Directory(`${this._path}/${path}`);
@@ -146,10 +154,10 @@ class Directory {
      * @return {View}
      * @private
      */
-    _getLayout() {
+    getLayoutView() {
         for (let index in this._views) {
             let view = this._views[index];
-            if(view.IsLayout) return view;
+            if (view.IsLayout) return view;
         }
         throw Error(`${this._path} 目录下没有Layout组件.`);
     }
@@ -159,8 +167,8 @@ class Directory {
      * @return {string}
      * @private
      */
-    _getPath() {
-        if(this._path === '.') return '/';
+    getPath() {
+        if (this._path === '.') return '/';
         return this.PathInfos[this.PathInfos.length - 1];
     }
 
@@ -173,9 +181,9 @@ class Directory {
      */
     _getChildrenRoutes() {
         let routes = [];
-        for(let index in this._views) {
+        for (let index in this._views) {
             let view = this._views[index];
-            if(view.IsLayout) continue;
+            if (view.IsLayout) continue;
             routes.push(this._parseView(view));
         }
 

@@ -2,7 +2,6 @@ import View from './view';
 import Directory from './directory';
 
 class RouteProvider {
-
     /**
      * 自动生成路由的目录
      * @type {Array}
@@ -58,9 +57,11 @@ class RouteProvider {
         for (let index in keys) {
             let path = keys[index];
             let component = dir(path);
-            views.push(View.create(path, component.default || component))
+            views.push(View.create(path, component.default || component));
         }
-        views = views.sort((x, y) => { return x.Deep  > y.Deep ? 1 : -1; });
+        views = views.sort((x, y) => {
+            return x.Deep > y.Deep ? 1 : -1;
+        });
         return views;
     }
 
