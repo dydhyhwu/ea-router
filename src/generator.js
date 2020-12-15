@@ -43,7 +43,7 @@ class RouteProvider {
      */
     generate() {
         let adapter = new VueRouterAdapter();
-        return adapter.convertDirectories(this._directory);
+        return adapter.convertDirectories([this._directory]);
     }
 
     /**
