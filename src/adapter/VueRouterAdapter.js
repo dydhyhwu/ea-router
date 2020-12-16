@@ -1,5 +1,8 @@
 import { Adapter } from './base';
-import {AutoRouteConfigProperty} from "../RouteConfig";
+import { AutoRouteConfigProperty } from '../RouteConfig';
+
+const CONTEXT_SPLIT_CHAR = ':';
+const PATH_SPLIT_CHAR = '/';
 
 export class VueRouterAdapter extends Adapter {
     convertDirectories(directories) {
@@ -31,9 +34,22 @@ export class VueRouterAdapter extends Adapter {
             component: instance,
             children: [],
         };
-        if(instance[AutoRouteConfigProperty]) {
-            let config = instance[AutoRouteConfigProperty];
-            route.name = config.name ?? route.name;
+        route = this.convertConfig(instance, route);
+        return route;
+    }
+
+    convertConfig(instance, route) {
+        if (!instance[AutoRouteConfigProperty]) {
+            return route;
+        }
+        let config = instance[AutoRouteConfigProperty];
+        route.name = config.name ?? route.name;
+
+        if (config.context.length > 0) {
+            route.path = this.combinePathWithContext(
+                route.path,
+                config.context
+            );
         }
         return route;
     }
@@ -59,5 +75,17 @@ export class VueRouterAdapter extends Adapter {
             routes.push(subRoute);
         }
         return routes;
+    }
+
+    combinePathWithContext(path, context) {
+        let result = path;
+        context = context
+            .map(x => `${CONTEXT_SPLIT_CHAR}${x}`)
+            .join(PATH_SPLIT_CHAR);
+        if (path.lastIndexOf(0) !== PATH_SPLIT_CHAR) {
+            result = `${path}${PATH_SPLIT_CHAR}`;
+        }
+        result = `${result}${context}`;
+        return result;
     }
 }
