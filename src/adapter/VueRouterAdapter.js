@@ -1,4 +1,5 @@
 import { Adapter } from './base';
+import {AutoRouteConfigProperty} from "../RouteConfig";
 
 export class VueRouterAdapter extends Adapter {
     convertDirectories(directories) {
@@ -23,12 +24,18 @@ export class VueRouterAdapter extends Adapter {
     }
 
     convertView(view) {
-        return {
+        let instance = view.Component;
+        let route = {
             path: view.IsIndex ? '' : view.LastInfo,
-            name: view.Component.name,
-            component: view.Component,
+            name: instance.name,
+            component: instance,
             children: [],
         };
+        if(instance[AutoRouteConfigProperty]) {
+            let config = instance[AutoRouteConfigProperty];
+            route.name = config.name ?? route.name;
+        }
+        return route;
     }
 
     /**
