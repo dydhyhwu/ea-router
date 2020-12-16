@@ -51,6 +51,8 @@ export class VueRouterAdapter extends Adapter {
                 config.context
             );
         }
+        route.props = config.useProp;
+
         return route;
     }
 
