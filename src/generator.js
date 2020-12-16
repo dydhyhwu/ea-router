@@ -49,6 +49,7 @@ class RouteProvider {
             EMPTY_ROUTE_PATH,
             component.default || component
         );
+        return this;
     }
 
     setNotFoundPage(component) {
@@ -56,6 +57,7 @@ class RouteProvider {
             ALL_ROUTE_PATH,
             component.default || component
         );
+        return this;
     }
 
     /**
