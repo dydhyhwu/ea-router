@@ -5,35 +5,48 @@ const CONTEXT_SPLIT_CHAR = ':';
 const PATH_SPLIT_CHAR = '/';
 
 export class VueRouterAdapter extends Adapter {
-    convertDirectories(directories) {
+    convertDirectories(directories, options) {
         let result = [];
         for (let index in directories) {
             let directory = directories[index];
-            let route = this.convertDirectory(directory);
+            let route = this.convertDirectory(directory, options);
             result.push(route);
         }
         return result;
     }
 
-    convertDirectory(directory) {
-        let layout = directory.getLayoutView();
-        let route = this.convertView(layout);
+    convertDirectory(directory, options) {
+        let layout = this.getLayoutView(directory, options);
+        let route = this.convertView(layout, true);
         route.path = directory.getPath();
         route.children = route.children.concat(
-            this.convertChildrenRoutes(directory)
+            this.convertChildrenRoutes(directory, options)
         );
 
         return route;
     }
 
-    convertView(view) {
+    getLayoutView(directory, options) {
+        if (directory.existedLayoutView()) {
+            return directory.getLayoutView();
+        }
+        if (options.defaultLayout) {
+            return options.defaultLayout;
+        }
+        throw Error(`[${directory.Path}]: 目录下没有Layout组件.`);
+    }
+
+    convertView(view, ignorePath) {
         let instance = view.Component;
         let route = {
-            path: view.IsIndex ? '' : view.LastInfo,
+            path: '',
             name: instance.name,
             component: instance,
             children: [],
         };
+        if (!ignorePath) {
+            route.path = view.IsIndex ? '' : view.LastInfo;
+        }
         route = this.convertConfig(instance, route);
         return route;
     }
@@ -69,7 +82,7 @@ export class VueRouterAdapter extends Adapter {
      * @return {Array}
      * @private
      */
-    convertChildrenRoutes(directory) {
+    convertChildrenRoutes(directory, options) {
         let routes = [];
         for (let index in directory.Views) {
             let view = directory.Views[index];
@@ -79,7 +92,7 @@ export class VueRouterAdapter extends Adapter {
 
         for (let index in directory.SubDirectories) {
             let subDirectory = directory.SubDirectories[index];
-            let subRoute = this.convertDirectory(subDirectory);
+            let subRoute = this.convertDirectory(subDirectory, options);
             routes.push(subRoute);
         }
         return routes;

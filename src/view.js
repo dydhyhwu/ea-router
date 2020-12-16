@@ -1,5 +1,4 @@
 class View {
-
     /**
      * 视图组件的路径
      * @type {string}
@@ -101,7 +100,7 @@ class View {
         path = path.split('/');
 
         for (let index in path) {
-            if(path[index].length > 0) {
+            if (path[index].length > 0) {
                 result.push(path[index].toLowerCase());
             }
         }

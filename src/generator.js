@@ -2,6 +2,8 @@ import View from './view';
 import Directory from './directory';
 import { VueRouterAdapter } from './adapter/VueRouterAdapter';
 
+const EMPTY_ROUTE_PATH = '';
+
 class RouteProvider {
     /**
      * 自动生成路由的目录
@@ -30,11 +32,20 @@ class RouteProvider {
      */
     _directory;
 
+    _defaultLayout = null;
+
     constructor(dir) {
         this._dir = dir;
         this._views = this._getViews(this._dir);
         this._directory = new Directory('.');
         this._generateDirectory();
+    }
+
+    setDefaultLayout(component) {
+        this._defaultLayout = View.create(
+            EMPTY_ROUTE_PATH,
+            component.default || component
+        );
     }
 
     /**
@@ -43,7 +54,10 @@ class RouteProvider {
      */
     generate() {
         let adapter = new VueRouterAdapter();
-        return adapter.convertDirectories([this._directory]);
+        let config = {
+            defaultLayout: this._defaultLayout,
+        };
+        return adapter.convertDirectories([this._directory], config);
     }
 
     /**

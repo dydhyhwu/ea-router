@@ -26,6 +26,10 @@ class Directory {
         return this._path.split('/');
     }
 
+    get Path() {
+        return this._path;
+    }
+
     /**
      * 目录路径
      * @private
@@ -160,6 +164,10 @@ class Directory {
             if (view.IsLayout) return view;
         }
         throw Error(`${this._path} 目录下没有Layout组件.`);
+    }
+
+    existedLayoutView() {
+        return this._views.some(view => view.IsLayout);
     }
 
     /**
