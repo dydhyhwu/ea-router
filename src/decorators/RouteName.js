@@ -1,4 +1,4 @@
-import { AutoRouteConfigProperty, RouteConfig } from '../RouteConfig';
+import { AutoRouteConfigProperty } from '../RouteConfig';
 import { ensureConfigProperty } from '../utils';
 
 export function RouteName(name) {
