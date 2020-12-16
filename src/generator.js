@@ -3,6 +3,7 @@ import Directory from './directory';
 import { VueRouterAdapter } from './adapter/VueRouterAdapter';
 
 const EMPTY_ROUTE_PATH = '';
+const ALL_ROUTE_PATH = '*';
 
 class RouteProvider {
     /**
@@ -34,6 +35,8 @@ class RouteProvider {
 
     _defaultLayout = null;
 
+    _notFoundPage = null;
+
     constructor(dir) {
         this._dir = dir;
         this._views = this._getViews(this._dir);
@@ -48,6 +51,13 @@ class RouteProvider {
         );
     }
 
+    setNotFoundPage(component) {
+        this._notFoundPage = View.create(
+            ALL_ROUTE_PATH,
+            component.default || component
+        );
+    }
+
     /**
      * 根据目录生成路由对象的数组，供vue-router使用（routes选项）
      * @return {Array}
@@ -56,6 +66,7 @@ class RouteProvider {
         let adapter = new VueRouterAdapter();
         let config = {
             defaultLayout: this._defaultLayout,
+            notFoundPage: this._notFoundPage,
         };
         return adapter.convertDirectories([this._directory], config);
     }

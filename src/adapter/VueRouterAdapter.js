@@ -12,6 +12,12 @@ export class VueRouterAdapter extends Adapter {
             let route = this.convertDirectory(directory, options);
             result.push(route);
         }
+
+        if (options.notFoundPage) {
+            let notFoundPageRoute = this.convertView(options.notFoundPage);
+            result.push(notFoundPageRoute);
+        }
+
         return result;
     }
 
