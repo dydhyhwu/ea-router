@@ -1,3 +1,5 @@
 export class Adapter {
-    convertDirectories(directories) {}
+    convertDirectories(directories) {
+        console.log(directories);
+    }
 }
