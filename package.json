@@ -12,11 +12,19 @@
     "vue-router"
   ],
   "author": "feather",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "prettier": "2.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhileKing/ea-router.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WhileKing/ea-router/issues"
+  },
+  "homepage": "https://github.com/WhileKing/ea-router#readme"
 }
