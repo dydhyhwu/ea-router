@@ -59,19 +59,6 @@ class Directory {
         }
     }
 
-    /**
-     * 转换成 vue-router 的route对象
-     */
-    toRouter() {
-        let layout = this.getLayoutView();
-        return {
-            path: this.getPath(),
-            name: layout.Component.name,
-            component: layout.Component,
-            children: this._getChildrenRoutes(),
-        };
-    }
-
     isCurrentDirectoryView(view) {
         let tailPathInfos = view.Path.replace(`${this._path}`, '')
             .replace(/^\//, '')
@@ -178,42 +165,6 @@ class Directory {
     getPath() {
         if (this._path === '.') return '/';
         return this.PathInfos[this.PathInfos.length - 1];
-    }
-
-    /**
-     * 获取当前目录对应下的子路由，分为两个部分
-     * 1. 当前层的视图
-     * 2. 子目录
-     * @return {Array}
-     * @private
-     */
-    _getChildrenRoutes() {
-        let routes = [];
-        for (let index in this._views) {
-            let view = this._views[index];
-            if (view.IsLayout) continue;
-            routes.push(this._parseView(view));
-        }
-
-        for (let index in this._subDirectory) {
-            let subRoute = this._subDirectory[index].toRouter();
-            routes.push(subRoute);
-        }
-        return routes;
-    }
-
-    /**
-     * 解析view, 转换成route
-     * @param view
-     * @return {Object}
-     * @private
-     */
-    _parseView(view) {
-        return {
-            path: view.IsIndex ? '' : view.LastInfo,
-            name: view.Component.name,
-            component: view.Component,
-        };
     }
 }
 
