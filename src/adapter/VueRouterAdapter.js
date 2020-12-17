@@ -49,6 +49,7 @@ export class VueRouterAdapter extends Adapter {
             name: instance.name,
             component: instance,
             children: [],
+            componentPath: view.Path,
         };
         if (!ignorePath) {
             route.path = view.IsIndex ? '' : view.LastInfo;
