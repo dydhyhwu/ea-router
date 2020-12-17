@@ -168,7 +168,7 @@ is equivalent to
 const router = new VueRouter({
   routes: [
     { 
-        path: 'path/to/component/on/directory/:id/:type',
+        path: 'path/to/component/on/directory',
         props: true,
         component: YourComponent,
     }
@@ -203,7 +203,7 @@ is equivalent to
 const router = new VueRouter({
   routes: [
     { 
-        path: 'path/to/component/on/directory/:id/:type',
+        path: 'path/to/component/on/directory',
         component: YourComponent,
         meta: {
                   title: 'Component Title',
