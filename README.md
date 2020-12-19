@@ -11,10 +11,113 @@
 
 **建议搭配 `vue-property-decorator` 使用更香噢！**
 
+简单原理如下图：
+
+![](.\docs\images\structure.png)
+
 ## Install
 
 ```bash
 npm i -S ea-router
+```
+
+## examples
+
+目录结构如下：
+```text
+views
+|-- About.vue
+|-- Home.vue
+|-- Layout.vue
+|-- user
+    |-- Add.vue
+```
+
+生成代码如下：
+```javascript
+// /src/router/index.js
+
+import Vue from "vue";
+import VueRouter from "vue-router";
+import AutoRouteGenerator from "ea-router";
+import defaultLayout from "../components/defaultLayout";
+import notFoundPage from "../components/notFound";
+
+Vue.use(VueRouter);
+let generator = new AutoRouteGenerator(
+  require.context("../views", true, /\.vue$/)
+);
+
+generator.setDefaultLayout(defaultLayout);
+generator.setNotFoundPage(notFoundPage);
+
+const routes = generator.generate();
+const router = new VueRouter({
+  routes
+});
+
+export default router;
+
+```
+
+项目入口：
+
+```javascript
+// src/main.js
+
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+
+Vue.config.productionTip = false
+
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')
+
+```
+
+最终自动生成的路由表（**运行时并不会产生这个文件，这里只是为了展示自动产生的路由对象会是什么样**）：
+```javascript
+const routes = [
+  {
+    path: "/",
+    component: () => import("src/views/layout.vue"),
+
+    children: [
+      {
+        path: "home/:id/:name",
+        component: () => import("src/views/home.vue"),
+        props: true
+      },
+
+      {
+        path: "about",
+        component: () => import("src/views/about.vue")
+      },
+
+      {
+        path: "user",
+        component: () => import("src/components/defaultLayout.vue"),
+
+        children: [
+          {
+            path: "add",
+            component: () => import("src/views/user/add.vue")
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    path: "*",
+    component: () => import("src/components/notFound.vue")
+  }
+];
+export default routes;
+
 ```
 
 ## rules
