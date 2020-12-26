@@ -1,6 +1,6 @@
 {
   "name": "ea-router",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "基于vue-router自动生成路由",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "vue-router"
   ],
   "files": [
-    "dist"
+    "dist",
+    "*.d.ts"
   ],
   "author": "feather",
   "license": "MIT",
