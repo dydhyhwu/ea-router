@@ -17,9 +17,10 @@
   "author": "feather",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
     "prettier": "2.2.1"
   },
   "repository": {

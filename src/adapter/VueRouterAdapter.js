@@ -109,7 +109,7 @@ export class VueRouterAdapter extends Adapter {
     combinePathWithContext(path, context) {
         let result = path;
         context = context
-            .map(x => `${CONTEXT_SPLIT_CHAR}${x}`)
+            .map((x) => `${CONTEXT_SPLIT_CHAR}${x}`)
             .join(PATH_SPLIT_CHAR);
         if (path.lastIndexOf(0) !== PATH_SPLIT_CHAR) {
             result = `${path}${PATH_SPLIT_CHAR}`;

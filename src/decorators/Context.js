@@ -2,7 +2,7 @@ import { ensureConfigProperty } from '../utils';
 import { AutoRouteConfigProperty } from '../RouteConfig';
 
 export function Context(...contextList) {
-    return target => {
+    return (target) => {
         ensureConfigProperty(target);
         target[AutoRouteConfigProperty].context = target[
             AutoRouteConfigProperty
@@ -11,7 +11,7 @@ export function Context(...contextList) {
 }
 
 export function EnableProp() {
-    return target => {
+    return (target) => {
         ensureConfigProperty(target);
         target[AutoRouteConfigProperty].useProp = true;
     };

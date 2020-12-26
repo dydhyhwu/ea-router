@@ -154,7 +154,7 @@ class Directory {
     }
 
     existedLayoutView() {
-        return this._views.some(view => view.IsLayout);
+        return this._views.some((view) => view.IsLayout);
     }
 
     /**

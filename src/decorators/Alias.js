@@ -1,5 +1,5 @@
-import {ensureConfigProperty} from "../utils";
-import {AutoRouteConfigProperty} from "../RouteConfig";
+import { ensureConfigProperty } from '../utils';
+import { AutoRouteConfigProperty } from '../RouteConfig';
 
 export function Alias(alias) {
     return (target) => {
