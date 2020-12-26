@@ -64,7 +64,8 @@ export class VueRouterAdapter extends Adapter {
         }
         let config = instance[AutoRouteConfigProperty];
         route.name = config.name ?? route.name;
-        route.alias = config.alias;
+
+        if (config.alias) route.alias = config.alias;
         route.props = config.useProp;
         route.meta = config.meta;
 
