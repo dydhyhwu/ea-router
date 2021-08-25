@@ -1,6 +1,7 @@
 import View from './view';
 import Directory from './directory';
 import { VueRouterAdapter } from './adapter/VueRouterAdapter';
+import minimatch from 'minimatch';
 
 const EMPTY_ROUTE_PATH = '';
 const ALL_ROUTE_PATH = '*';
@@ -37,11 +38,10 @@ class RouteProvider {
 
     _notFoundPage = null;
 
+    _ignorePatterns = [];
+
     constructor(dir) {
         this._dir = dir;
-        this._views = this._getViews(this._dir);
-        this._directory = new Directory('.');
-        this._generateDirectory();
     }
 
     setDefaultLayout(component) {
@@ -60,11 +60,16 @@ class RouteProvider {
         return this;
     }
 
+    ignore(...patterns) {
+        this._ignorePatterns.push(...patterns)
+    }
+
     /**
      * 根据目录生成路由对象的数组，供vue-router使用（routes选项）
      * @return {Array}
      */
     generate() {
+        this._parseDir();
         let adapter = new VueRouterAdapter();
         let config = {
             defaultLayout: this._defaultLayout,
@@ -83,6 +88,9 @@ class RouteProvider {
         let views = [];
 
         let keys = dir.keys();
+        keys = this._getAvailableFiles(keys);
+
+        console.log(keys);
         for (let index in keys) {
             let path = keys[index];
             let component = dir(path);
@@ -103,6 +111,29 @@ class RouteProvider {
             let view = this._views[index];
             this._directory.addView(view);
         }
+    }
+
+    _getAvailableFiles(keys) {
+        let result = [];
+        for (const key of keys) {
+            if(this._isIgnore(key)) continue;
+            result.push(key);
+        }
+        return result;
+    }
+
+    _isIgnore(key) {
+        for (const ignorePattern of this._ignorePatterns) {
+            const isMatch = minimatch(key, ignorePattern);
+            if(isMatch) return true;
+        }
+        return false;
+    }
+
+    _parseDir() {
+        this._views = this._getViews(this._dir);
+        this._directory = new Directory('.');
+        this._generateDirectory();
     }
 }
 

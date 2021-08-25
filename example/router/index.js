@@ -7,8 +7,9 @@ import notFoundPage from '@/components/notFoundPage';
 Vue.use(VueRouter)
 
 let generator = new RouteGenerate(require.context('../views', true, /\.vue$/))
-generator.setDefaultLayout(defaultLayout);
-generator.setNotFoundPage(notFoundPage);
+generator.setDefaultLayout(defaultLayout)
+         .setNotFoundPage(notFoundPage)
+         .ignore('./**/components/*');
 
 const routes = generator.generate();
 
