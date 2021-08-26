@@ -15,6 +15,23 @@
 
 ![](.\docs\images\structure.png)
 
+## features
+
+- [x] 自动将目录映射成路由表
+- [x] 重构项目，改善灵活性
+- [x] 路由装饰器，移除组件内硬编码
+- [x] 可设置默认`Layout`
+- [x] 可设置 `NotFound` 对应的路由页面
+- [x] 抽离`目录` => `路由对象`映射逻辑，利用**适配器模式**，以便灵活支持不同的路由框架
+- [x] 实现 `vue-router 3.x` 的适配器
+- [ ] 实现 `vue-router-next` 的适配器
+- [x] 添加忽略模式支持
+- [ ] 实现路由文件的自动生成（基于模板语法）
+- [ ] 添加可设置所有选项配置的装饰器
+- [ ] 开放加载自定义适配器
+- [ ] typescript支持
+- [ ] 回补单元测试
+
 ## Install
 
 ```bash
@@ -131,13 +148,14 @@ export default routes;
 
 ## Usage
 
-目前有3个api以及5个装饰器
+目前有4个api以及5个装饰器
 
 api:
 
 - [`generate`](#generate)
 - [`setDefaultLayout`](#setDefaultLayout)
 - [`setNotFoundPage`](#setNotFoundPage)
+- [`ignore`](#ignore)
 
 decorators:
 
@@ -146,6 +164,33 @@ decorators:
 - [`@Context`](#Context)
 - [`@EnableProps`](#EnableProps)
 - [`@Meta`](#Meta)
+
+### <a id="ignore"></a> `ignore` api
+
+在路由文件下，有时候会存在与页面紧密耦合的组件，比如布局（Header, Footer, NavMenu之类）。但又不属于路由，因此可以使用忽略模式进行忽略。
+
+> 参数为文件/目录匹配的写法，注意一点**./ 表示的是指定的路由文件夹，因此必须加上**
+
+下面示范一下忽略掉views目录下所有**components** 和 **layouts** 目录的写法。
+
+```javascript
+// src/router/index.js
+
+import Vue from 'vue'
+import Router from 'vue-router'
+import RouteGenerator from "ea-router";
+
+Vue.use(Router)
+let generator = new RouteGenerator(require.context('./views', true, /\.vue$/))
+generator.ignore('./**/components/*', './**/layouts/*');
+
+export default new Router({
+  routes: generator.generate()
+})
+```
+
+上述操作后，生成的路由里会忽略掉这两种文件夹下所有内容。且不会出现在路由里。
+
 
 ### <a id="generate"></a> `generate` api
 
@@ -452,22 +497,6 @@ const router = new VueRouter({
   ]
 })
 ```
-
-## features
-
-- [x] 自动将目录映射成路由表
-- [x] 重构项目，改善灵活性
-- [x] 路由装饰器，移除组件内硬编码
-- [x] 可设置默认`Layout`
-- [x] 可设置 `NotFound` 对应的路由页面
-- [x] 抽离`目录` => `路由对象`映射逻辑，利用**适配器模式**，以便灵活支持不同的路由框架
-- [x] 实现 `vue-router 3.x` 的适配器
-- [ ] 实现 `vue-router-next` 的适配器
-- [ ] 实现路由文件的自动生成（基于模板语法）
-- [ ] 添加可设置所有选项配置的装饰器
-- [ ] 开放加载自定义适配器
-- [ ] typescript支持
-- [ ] 回补单元测试
 
 ## about 
 
