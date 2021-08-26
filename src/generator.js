@@ -62,6 +62,7 @@ class RouteProvider {
 
     ignore(...patterns) {
         this._ignorePatterns.push(...patterns)
+        return this;
     }
 
     /**

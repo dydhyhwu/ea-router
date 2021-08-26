@@ -1,3 +1,5 @@
+[![构建状态](https://teenagers.coding.net/badges/gongjuku/job/782972/release/build.svg)](https://teenagers.coding.net/p/gongjuku/ci/job)
+
 # ea-router
 
 `ea-router`意为：easy auto router。

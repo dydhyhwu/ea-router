@@ -1,8 +1,9 @@
 declare module 'ea-router' {
     export default class RouteGenerate {
         constructor(dir: any);
-        setDefaultLayout(layout: any): void;
-        setNotFoundPage(layout: any): void;
+        setDefaultLayout(layout: any): RouteGenerate;
+        setNotFoundPage(layout: any): RouteGenerate;
+        ignore(...patterns: string[]): RouteGenerate
         generate(): Array<any>;
     }
     export function RouteName(name: string): any;
