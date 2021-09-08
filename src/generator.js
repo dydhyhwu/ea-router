@@ -91,7 +91,6 @@ class RouteProvider {
         let keys = dir.keys();
         keys = this._getAvailableFiles(keys);
 
-        console.log(keys);
         for (let index in keys) {
             let path = keys[index];
             let component = dir(path);
