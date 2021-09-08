@@ -11,4 +11,6 @@ declare module 'ea-router' {
     export function EnableProp(): any;
     export function Alias(alias: string): any;
     export function Meta(data: any): any;
+    export function Redirect(path: string): any;
+    export function RedirectByName(name: string): any;
 }
