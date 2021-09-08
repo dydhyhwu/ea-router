@@ -68,6 +68,7 @@ export class VueRouterAdapter extends Adapter {
         if (config.alias) route.alias = config.alias;
         route.props = config.useProp;
         route.meta = config.meta;
+        route.redirect = config.redirect;
 
         if (config.context.length > 0) {
             route.path = this.combinePathWithContext(

@@ -3,9 +3,14 @@
 </template>
 
 <script>
-export default {
-    name: 'Index',
-};
+import { Vue, Component } from 'vue-property-decorator';
+import { Redirect } from '../../src';
+
+export default
+@Component
+@Redirect('/about')
+class Index extends Vue {
+}
 </script>
 
 <style scoped>
