@@ -1,10 +1,19 @@
 {
-  "presets": ["@vue/cli-plugin-babel/preset"],
-  "plugins": [
-    "transform-class-properties",
-    ["@babel/plugin-proposal-decorators", {
-      "legacy": true
-    }],
-    ["@babel/plugin-proposal-class-properties", {"loose": true}]
-  ]
+  "env": {
+    "dev": {
+      "presets": ["@vue/cli-plugin-babel/preset"],
+      "plugins": [
+        ["@babel/plugin-proposal-decorators", {
+          "legacy": true
+        }],
+        ["@babel/plugin-proposal-class-properties", {"loose": true}]
+      ]
+    },
+    "build": {
+      "presets": ["@babel/preset-env"],
+      "plugins": [
+        "transform-class-properties"
+      ]
+    }
+  }
 }
