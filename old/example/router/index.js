@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import RouteGenerate from '../../src';
+import RouteGenerate from '../../old/src';
 import defaultLayout from '@/components/defaultLayout';
 import notFoundPage from '@/components/notFoundPage';
 

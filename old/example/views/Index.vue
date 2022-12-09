@@ -4,7 +4,7 @@
 
 <script>
 import { Vue, Component } from 'vue-property-decorator';
-import { Redirect } from '../../src';
+import { Redirect } from '../../old/src';
 
 export default
 @Component
