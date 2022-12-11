@@ -1,5 +1,24 @@
 [![构建状态](https://teenagers.coding.net/badges/gongjuku/job/782972/release/build.svg)](https://teenagers.coding.net/p/gongjuku/ci/job)
 
+# v4 功能清单
+> v4版本将是全新的版本，也将实现在业务中积累出来的需求并实现它。
+
+- [ ] TypeScript支持
+- [ ] 嵌套路由支持
+- [ ] 非嵌套路由支持
+- [ ] 混合模式支持（嵌套+非嵌套）
+- [ ] Vue 3.x 支持
+- [ ] 路由文件生成支持（将动态路由自动生成出router/index.ts）
+- [ ] 更多装饰器的支持
+- [ ] 单元测试
+- [ ] 示例项目（嵌套、非嵌套、混合模式、Vue 3.x）
+- [ ] 忽略模式支持（指定目录下通过文件通配符来忽略某些路劲避免被路由化，如：`views/user/components`
+- [ ] 默认`Layout`支持
+- [ ] `NotFound`页面设置支持
+- [ ] 配置文件模式（配合路由文件生成）
+- [ ] 撰写文档、部署静态文档地址
+- [ ] 发布v4
+
 # ea-router
 
 `ea-router`意为：easy auto router。
