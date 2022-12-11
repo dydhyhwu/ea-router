@@ -1,7 +1,4 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <header>
@@ -10,12 +7,13 @@ import HelloWorld from "./components/HelloWorld.vue";
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/pages">Pages</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <RouterView class="content" />
 </template>
 
 <style scoped>
@@ -63,5 +61,9 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.content {
+  flex-grow: 1;
 }
 </style>

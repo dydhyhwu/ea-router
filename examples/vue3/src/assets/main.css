@@ -2,7 +2,9 @@
 
 #app {
     margin: 0 auto;
-
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     font-weight: normal;
 }
 
