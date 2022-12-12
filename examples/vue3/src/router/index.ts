@@ -33,6 +33,11 @@ const router = createRouter({
           name: "page3",
           component: () => import("../views/pages/Page3.vue"),
         },
+        {
+          path: "page/:id",
+          name: "pageWithParameter",
+          component: () => import("../views/pages/PageWithParameter.vue"),
+        },
       ],
     },
     {

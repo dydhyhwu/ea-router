@@ -1,12 +1,12 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="navigation">
-    <router-link to="/pages/page1"><h3>Page1</h3></router-link>
+    <router-link to="/pages/page1"><h3>Page 1</h3></router-link>
     <hr class="divider" />
-    <router-link to="/pages/page2"><h3>Page2</h3></router-link>
+    <router-link to="/pages/page2"><h3>Page 2</h3></router-link>
     <hr class="divider" />
-    <router-link to="/pages/page3"><h3>Page3</h3></router-link>
+    <router-link to="/pages/page3"><h3>Page 3</h3></router-link>
+    <hr class="divider" />
+    <router-link to="/pages/page/100"><h3>Page with parameter</h3></router-link>
     <hr class="divider" />
   </div>
 </template>
