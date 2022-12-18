@@ -1,0 +1,56 @@
+{
+  "name": "ea-router",
+  "version": "3.0.7",
+  "description": "基于vue-router自动生成路由",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev:example": "cross-env BABEL_ENV=dev vue-cli-service serve",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env BABEL_ENV=build babel src --out-dir dist"
+  },
+  "keywords": [
+    "auto-router",
+    "route",
+    "vue"
+  ],
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "author": "feather",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "minimatch": "^3.0.4",
+    "prettier": "2.2.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhileKing/ea-router.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WhileKing/ea-router/issues"
+  },
+  "homepage": "https://github.com/WhileKing/ea-router#readme"
+}

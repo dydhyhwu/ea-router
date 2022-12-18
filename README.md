@@ -19,6 +19,15 @@
 - [ ] 撰写文档、部署静态文档地址
 - [ ] 发布v4
 
+# Refactor
+
+思路：
+1. 应该拆分成三块：`Loader`、`Parser`、`Generator`。
+   > `Loader`负责将目标文件编译、并得到构建产物与其对应的原始文件路径。结果物结构示例（{ path, import})  
+   > `Parser`负责将`Loader`产物进行解析（解析import得到框架定义的路由内容），还原其路由结构
+   > `Generator`负责将`Parser`产出的路由结构映射成具体路由框架所需的对象结构
+2. 单元测试可以直接从`Parser`解析完`import`内容后开始，后面就是目前现在框架里在做的事情
+
 # ea-router
 
 `ea-router`意为：easy auto router。
